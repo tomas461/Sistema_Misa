@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Formulario dinámico</title>
+</head>
+<body>
+
+    <h2>Registro</h2>
+
+    <form id="formulario">
+        <input type="text" id="nombre" placeholder="Nombre" required><br><br>
+        <input type="text" id="apellido" placeholder="Apellido" required><br><br>
+        <button type="submit">Guardar</button>
+    </form>
+
+    <h3>Datos guardados:</h3>
+    <p id="resultado"></p>
+
+    <script>
+        // Mostrar datos guardados al cargar la página
+        function mostrarDatos() {
+            let nombre = localStorage.getItem("nombre");
+            let apellido = localStorage.getItem("apellido");
+
+            if (nombre && apellido) {
+                document.getElementById("resultado").textContent =
+                    nombre + " " + apellido;
+            }
+        }
+
+        // Ejecutar al cargar
+        mostrarDatos();
+
+        // Capturar formulario sin recargar
+        document.getElementById("formulario").addEventListener("submit", function(e) {
+            e.preventDefault();
+
+            let nombre = document.getElementById("nombre").value;
+            let apellido = document.getElementById("apellido").value;
+
+            // Guardar
+            localStorage.setItem("nombre", nombre);
+            localStorage.setItem("apellido", apellido);
+
+            // Mostrar sin recargar
+            mostrarDatos();
+        });
+    </script>
+
+</body>
+</html>
